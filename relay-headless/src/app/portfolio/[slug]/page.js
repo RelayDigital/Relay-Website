@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 const portfolioData = {
   "virtual-xposure": {
     name: "Virtual Xposure",
-    category: "Real Estate Media",
+    category: "Service",
     description:
       "Media and technology platform for real estate professionals. Virtual Xposure provides photography, videography, drone, and 3D tour services powered by a custom scheduling and delivery platform.",
     relationship: "Operational Partnership",
@@ -28,7 +28,7 @@ const portfolioData = {
   },
   anavi: {
     name: "ANAVI",
-    category: "Ecommerce",
+    category: "SaaS",
     description:
       "Ecommerce marketplace and product platform. ANAVI (formerly Navi Marketplace) is a curated ecommerce experience focused on product discovery and brand partnerships.",
     relationship: "Built & Operated",

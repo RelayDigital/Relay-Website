@@ -34,20 +34,7 @@ const RootLayout = ({ children }) => {
         <meta name="viewport" content={viewport} />
         <meta name="robots" content={metadata.robots} />
 
-        <link rel="shortcut icon" href="/img/favicon.ico" />
-        <link rel="apple-touch-icon" sizes="180x180" href="/img/favicon.webp" />
-        <link
-          rel="icon"
-          type="image/webp"
-          sizes="32x32"
-          href="/img/favicon.webp"
-        />
-        <link
-          rel="icon"
-          type="image/webp"
-          sizes="16x16"
-          href="/img/favicon.webp"
-        />
+        {/* Favicon handled by src/app/icon.png (Next.js App Router convention) */}
 
         {/* <link
           rel="preload"

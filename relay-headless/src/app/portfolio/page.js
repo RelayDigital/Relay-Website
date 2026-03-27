@@ -10,7 +10,7 @@ const portfolioItems = [
   {
     name: "Virtual Xposure",
     slug: "virtual-xposure",
-    category: "Real Estate Media",
+    category: "Service",
     description:
       "Media and technology platform for real estate professionals.",
   },
@@ -18,13 +18,13 @@ const portfolioItems = [
     name: "Vremly",
     slug: "vremly",
     category: "SaaS",
-    description: "SaaS marketplace platform for digital services.",
+    description: "Marketplace platform for digital services.",
   },
   {
     name: "ANAVI",
     slug: "anavi",
-    category: "Ecommerce",
-    description: "Ecommerce marketplace and product platform.",
+    category: "SaaS",
+    description: "Curated marketplace and product platform.",
   },
   {
     name: "Ukii",
@@ -37,14 +37,14 @@ const portfolioItems = [
     slug: "clean-screens",
     category: "Ecommerce",
     description:
-      "Ecommerce brand — conversion rate optimization and funnel development.",
+      "Screen cleaning brand — conversion rate optimization and funnel development.",
   },
   {
     name: "GoodMix",
     slug: "goodmix",
     category: "Ecommerce",
     description:
-      "Ecommerce brand — landing page optimization and performance marketing.",
+      "Health and nutrition brand — landing page optimization and performance marketing.",
   },
 ];
 

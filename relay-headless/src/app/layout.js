@@ -10,11 +10,11 @@ import { GoogleAnalytics, GoogleTagManager } from "@next/third-parties/google";
 // const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "Relay Digital - Modern Web Design & Development Agency",
+  title: "Relay Digital — Technology & Digital Infrastructure",
   description:
-    "Relay Digital delivers innovative web design and development services, focusing on performance, cutting-edge design, and scalability to boost your online presence.",
+    "Relay Digital builds, operates, and invests in technology companies. Software platforms, automation systems, and digital services.",
   keywords:
-    "modern web design, web development services, professional web design agency, scalable web solutions, custom web development",
+    "technology company, digital infrastructure, software development, automation systems, SaaS, holding company",
   charset: "UTF-8",
   robots: "index, follow",
   image: "/img/social-media-share-preview.webp",

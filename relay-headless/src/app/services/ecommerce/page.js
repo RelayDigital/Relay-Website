@@ -1,13 +1,12 @@
 "use client";
 import { useEffect, lazy, Suspense } from "react";
 import Image from "next/image";
-import Marquee from "../../../components/Marquee";
 import CallToAction from "../../../components/layouts/home/sections/CallToAction";
 
 const Contact = lazy(() => import("../../../components/layouts/home/sections/Contact"));
 const CalendlyEmbed = lazy(() => import("../../../components/layouts/home/sections/CalendlyEmbed"));
 
-export default function MarketingFunnelsPage() {
+export default function EcommercePage() {
   useEffect(() => {
     const loadGSAP = async () => {
       const { gsap } = await import("gsap");
@@ -53,20 +52,20 @@ export default function MarketingFunnelsPage() {
           <div className="col-span-2 lg:mt-6 lg:mr-4">
             <div className="-z-10 max-w-4xl text-center text-neutral-200 text-3xl sm:text-5xl lg:text-start lg:text-7xl">
               <h1 className="md:bg-gradient-to-br md:from-neutral-100 md:from-55% md:to-neutral-500 md:bg-clip-text font-medium tracking-tight md:text-transparent text-neutral-100 lg:min-h-[20rem]" data-speed="0.5">
-                Funnels That Turn <span className="text-blue-500">Clicks</span> Into Customers
+                Ecommerce That <span className="text-blue-500">Prints</span> Revenue
                 <span className="text-blue-500">.</span>
               </h1>
             </div>
           </div>
           <div className="col-span-1 flex flex-col items-start justify-between gap-y-8 py-12 text-start lg:h-full">
             <p className="text-center text-xl leading-tight text-neutral-300 lg:text-start" data-speed="0.7">
-              Custom landing pages and conversion funnels designed, built, and optimized to squeeze every dollar of ROI from your ad spend. CRO principles baked into every decision.
+              We build online stores that don&apos;t just look good — they sell. Shopify development, conversion optimization, and growth strategy for brands serious about revenue.
             </p>
             <div className="block w-full justify-center md:flex md:flex-row lg:justify-start" data-speed="0.8">
               <a href="/contact" className="pointer-events-auto">
                 <button className="relative rounded-full text-center transition-all duration-500 transform overflow-hidden z-40 w-full px-8 py-6 bg-blue-500 text-neutral-950 border border-blue-500 button hover:text-neutral-50 group text-xl uppercase md:text-2xl">
                   <div className="flex flex-row group relative z-10 w-full justify-center">
-                    Get a Price
+                    Start Your Store
                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 256 256" className="ml-2 inline-block"><path d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"/></svg>
                   </div>
                 </button>
@@ -83,10 +82,10 @@ export default function MarketingFunnelsPage() {
       <div className="mx-auto min-w-[75vw] px-6 lg:px-8">
         <dl className="relative z-40 mt-6 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-neutral-600 bg-neutral-600 text-center shadow-2xl shadow-blue-500/50 lg:grid-cols-4" data-speed="1.05">
           {[
-            { value: "12.7x", label: "Average Ad Return" },
-            { value: "+39%", label: "Conversion Rate Lift" },
-            { value: "60%", label: "More Time on Page" },
-            { value: "10x", label: "Faster Load Speed" },
+            { value: "+54%", label: "Average CR Increase" },
+            { value: "+37%", label: "AOV Growth" },
+            { value: "2.1s", label: "Average Load Time" },
+            { value: "3x", label: "Revenue Growth" },
           ].map((s) => (
             <div key={s.label} className="flex flex-col items-center justify-center bg-neutral-900 px-2 py-6">
               <dt className="font-red-hat-text mt-1 text-base font-normal leading-tight tracking-tight text-neutral-300">{s.label}</dt>
@@ -96,20 +95,13 @@ export default function MarketingFunnelsPage() {
         </dl>
       </div>
 
-      {/* MARQUEE */}
-      <Marquee speed={1}>
-        {["homezy", "thai", "wellbeing", "agenci", "joyfolio", "inspire", "fashion", "requesto", "darkstudio"].map((img) => (
-          <Image key={img} src={`/img/${img}.webp`} alt={img} className="sm:h-54 h-48 w-auto rounded-lg border border-neutral-700 grayscale-[0%] lg:h-72" loading="eager" width={500} height={288} decoding="async" />
-        ))}
-      </Marquee>
-
       {/* WHY */}
       <section className="relative py-12 overflow-x-hidden">
         <div className="mx-auto max-w-7xl px-5">
           <div className="relative flex min-h-[30vh] flex-col items-center justify-center overflow-hidden w-full rounded-md z-0">
             <div className="relative z-50 flex flex-col items-center px-5">
               <h2 className="mt-2 text-3xl font-medium tracking-tight text-white sm:text-6xl text-center capitalize">
-                <span className="bg-gradient-to-b from-neutral-50 from-60% to-neutral-400 bg-clip-text text-transparent lg:to-neutral-600">Conversion-First Architecture</span>
+                <span className="bg-gradient-to-b from-neutral-50 from-60% to-neutral-400 bg-clip-text text-transparent lg:to-neutral-600">End-to-End Ecommerce</span>
               </h2>
             </div>
           </div>
@@ -121,13 +113,13 @@ export default function MarketingFunnelsPage() {
                   <div className="lg:max-w-lg">
                     <h2 className="mt-2 text-3xl font-medium tracking-tight text-white sm:text-6xl">
                       <span className="bg-gradient-to-b from-neutral-50 from-60% to-neutral-400 bg-clip-text text-transparent lg:to-neutral-600">
-                        High-Performance{" "}
-                        <span className="bg-gradient-to-b from-blue-500 from-60% to-blue-400 bg-clip-text text-transparent lg:to-blue-600 underline">Landing Pages</span>
-                        <span className="text-blue-500">.</span>
+                        Custom{" "}
+                        <span className="bg-gradient-to-b from-blue-500 from-60% to-blue-400 bg-clip-text text-transparent lg:to-blue-600 underline">Storefronts</span>{" "}
+                        Built to Sell<span className="text-blue-500">.</span>
                       </span>
                     </h2>
                     <p className="text-md mt-6 font-light text-neutral-300 md:text-lg">
-                      Custom-coded pages built to convert paid traffic. CRO principles, direct response copywriting, and persuasion frameworks baked into every layout decision, headline, and CTA placement.
+                      Shopify, Shopify Plus, and headless commerce builds designed from the ground up for conversion. Product page optimization, collection architecture, and upsell logic that increases AOV from day one.
                     </p>
                     <a href="/contact">
                       <button className="relative rounded-full text-center transition-all duration-500 transform overflow-hidden z-40 px-6 py-3 text-base bg-blue-500 text-neutral-950 border border-blue-500 button hover:text-neutral-50 group mt-6 text-lg uppercase">
@@ -139,8 +131,8 @@ export default function MarketingFunnelsPage() {
                   </div>
                 </div>
                 <div className="relative flex items-start justify-end">
-                  <Image src="/img/increase-cr.webp" alt="Landing pages" className="hidden sm:block right h-auto w-[24rem] max-w-none sm:w-[36rem] md:-ml-4 lg:-ml-0" loading="lazy" width={1217} height={1227} decoding="async" />
-                  <Image src="/img/increase-cr.webp" alt="Landing pages" className="block sm:hidden h-auto w-[24rem] max-w-none sm:w-[36rem]" loading="lazy" width={1217} height={1227} decoding="async" />
+                  <Image src="/img/increase-cr.webp" alt="Ecommerce storefront" className="hidden sm:block right h-auto w-[24rem] max-w-none sm:w-[36rem] md:-ml-4 lg:-ml-0" loading="lazy" width={1217} height={1227} decoding="async" />
+                  <Image src="/img/increase-cr.webp" alt="Ecommerce storefront" className="block sm:hidden h-auto w-[24rem] max-w-none sm:w-[36rem]" loading="lazy" width={1217} height={1227} decoding="async" />
                 </div>
               </div>
             </div>
@@ -153,13 +145,13 @@ export default function MarketingFunnelsPage() {
                   <div className="lg:max-w-lg">
                     <h3 className="mt-2 text-3xl font-medium tracking-tight text-white sm:text-6xl">
                       <span className="bg-gradient-to-b from-neutral-50 from-60% to-neutral-400 bg-clip-text text-transparent lg:to-neutral-600">
-                        Multi-Step{" "}
-                        <span className="bg-gradient-to-b from-blue-500 from-60% to-blue-400 bg-clip-text text-transparent lg:to-blue-600 underline">Funnels</span>{" "}
-                        & CRO<span className="text-blue-500">.</span>
+                        Checkout &{" "}
+                        <span className="bg-gradient-to-b from-blue-500 from-60% to-blue-400 bg-clip-text text-transparent lg:to-blue-600 underline">Retention</span>{" "}
+                        Optimization<span className="text-blue-500">.</span>
                       </span>
                     </h3>
                     <p className="text-md mt-6 font-light text-neutral-300 md:text-lg">
-                      Pre-sell pages, quiz funnels, lead magnets, and checkout flows that guide prospects from click to conversion. Plus A/B testing, heatmap analysis, and data-driven iteration to continuously improve.
+                      Cart abandonment recovery, one-click upsells, checkout UX improvements, post-purchase flows, loyalty programs, and subscription models. We maximize customer LTV at every touchpoint.
                     </p>
                     <a href="/contact">
                       <button className="relative rounded-full text-center transition-all duration-500 transform overflow-hidden z-40 px-6 py-3 text-base bg-blue-500 text-neutral-950 border border-blue-500 button hover:text-neutral-50 group mt-6 uppercase">
@@ -171,8 +163,8 @@ export default function MarketingFunnelsPage() {
                   </div>
                 </div>
                 <div className="relative -ml-5 flex items-start justify-end lg:order-first">
-                  <Image src="/img/design.webp" alt="CRO funnels" className="hidden sm:block left h-auto w-[28rem] max-w-none sm:w-[40rem] md:-ml-4 lg:-ml-0" loading="lazy" width={1365} height={832} decoding="async" />
-                  <Image src="/img/design.webp" alt="CRO funnels" className="block sm:hidden h-auto w-[28rem] max-w-none sm:w-[40rem] -mr-24" loading="lazy" width={1365} height={832} decoding="async" />
+                  <Image src="/img/design.webp" alt="Retention optimization" className="hidden sm:block left h-auto w-[28rem] max-w-none sm:w-[40rem] md:-ml-4 lg:-ml-0" loading="lazy" width={1365} height={832} decoding="async" />
+                  <Image src="/img/design.webp" alt="Retention optimization" className="block sm:hidden h-auto w-[28rem] max-w-none sm:w-[40rem] -mr-24" loading="lazy" width={1365} height={832} decoding="async" />
                 </div>
               </div>
             </div>
@@ -180,34 +172,21 @@ export default function MarketingFunnelsPage() {
         </div>
       </section>
 
-      {/* RESULTS */}
+      {/* PLATFORMS */}
       <section className="border-y border-neutral-700 bg-neutral-900 py-12 lg:py-16">
-        <div className="mx-auto max-w-7xl px-5">
-          <h2 className="text-3xl font-medium tracking-tight text-white sm:text-5xl mb-10 text-center">
-            <span className="bg-gradient-to-b from-neutral-50 from-60% to-neutral-400 bg-clip-text text-transparent lg:to-neutral-600">Proven Results</span>
+        <div className="mx-auto max-w-7xl px-5 text-center">
+          <h2 className="text-3xl font-medium tracking-tight text-white sm:text-5xl mb-8">
+            <span className="bg-gradient-to-b from-neutral-50 from-60% to-neutral-400 bg-clip-text text-transparent lg:to-neutral-600">Platforms</span>
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {[
-              { brand: "Clean Screens", metrics: [{ v: "+39%", l: "CR Increase" }, { v: "+44%", l: "ROI" }, { v: "+55%", l: "Speed" }, { v: "-21%", l: "Bounce" }] },
-              { brand: "GoodMix", metrics: [{ v: "+54%", l: "CR Increase" }, { v: "+61%", l: "ROI" }, { v: "+80%", l: "Speed" }, { v: "-38%", l: "Bounce" }] },
-            ].map((r) => (
-              <div key={r.brand} className="bg-neutral-950 border border-neutral-800 rounded-xl p-8">
-                <h3 className="text-xl font-bold text-neutral-50 mb-6">{r.brand}</h3>
-                <div className="grid grid-cols-2 gap-4">
-                  {r.metrics.map((m) => (
-                    <div key={m.l}>
-                      <p className="text-2xl font-bold text-blue-500">{m.v}</p>
-                      <p className="text-xs uppercase tracking-[0.15em] text-neutral-400 mt-1">{m.l}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
+          <div className="flex flex-wrap justify-center gap-3">
+            {["Shopify", "Shopify Plus", "Headless Commerce", "Next.js Commerce", "Stripe", "Klaviyo", "Recharge"].map((t) => (
+              <span key={t} className="px-5 py-2.5 bg-neutral-800 border border-neutral-700 rounded-full text-sm text-neutral-300 font-medium">{t}</span>
             ))}
           </div>
         </div>
       </section>
 
-      <CallToAction header="Same ad spend. More revenue." description="Custom funnels live within 20 days. Conversion-driven, beyond just aesthetics." cta="Get a Price" href="/contact" />
+      <CallToAction header="Your store is leaving money on the table." description="Let us show you where the revenue is hiding — with a free store audit." cta="Get a Free Store Audit" href="/contact" />
 
       <Suspense fallback={null}><CalendlyEmbed /></Suspense>
       <Suspense fallback={null}><Contact /></Suspense>

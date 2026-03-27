@@ -87,7 +87,7 @@ const Footer = () => {
         ></div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 text-neutral-300">
           <div className="grid grid-cols-12 gap-4 gap-y-8 sm:gap-8 py-8 md:py-12">
-            <div className="col-span-12 lg:col-span-4">
+            <div className="col-span-12 lg:col-span-3">
               <div>
                 <a
                   className="-ml-2 flex w-60 items-center rounded-full px-2 text-3xl transition"
@@ -97,11 +97,14 @@ const Footer = () => {
                   <span className="text-neutral-300">Digital</span>
                   <span className="text-blue-500">.</span>
                 </a>
+                <p className="mt-3 text-sm text-neutral-500 max-w-xs">
+                  Technology & Digital Infrastructure
+                </p>
               </div>
             </div>
             <div className="col-span-6 md:col-span-3 lg:col-span-2">
               <div className="dark:text-neutral-300 font-medium mb-2">
-                Get Started
+                Company
               </div>
               <ul className="text-sm">
                 <li className="mb-2">
@@ -115,9 +118,25 @@ const Footer = () => {
                 <li className="mb-2">
                   <a
                     className="text-muted hover:text-neutral-700 hover:underline dark:text-neutral-400 transition duration-150 ease-in-out"
-                    href="/#pricing"
+                    href="/about"
                   >
-                    Pricing
+                    About
+                  </a>
+                </li>
+                <li className="mb-2">
+                  <a
+                    className="text-muted hover:text-neutral-700 hover:underline dark:text-neutral-400 transition duration-150 ease-in-out"
+                    href="/portfolio"
+                  >
+                    Portfolio
+                  </a>
+                </li>
+                <li className="mb-2">
+                  <a
+                    className="text-muted hover:text-neutral-700 hover:underline dark:text-neutral-400 transition duration-150 ease-in-out"
+                    href="/careers"
+                  >
+                    Careers
                   </a>
                 </li>
                 <li className="mb-2">
@@ -126,6 +145,94 @@ const Footer = () => {
                     href="/contact"
                   >
                     Contact
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div className="col-span-6 md:col-span-3 lg:col-span-2">
+              <div className="dark:text-neutral-300 font-medium mb-2">
+                Services
+              </div>
+              <ul className="text-sm">
+                <li className="mb-2">
+                  <a
+                    className="text-muted hover:text-neutral-700 hover:underline dark:text-neutral-400 transition duration-150 ease-in-out"
+                    href="/services/web-development"
+                  >
+                    Software Development
+                  </a>
+                </li>
+                <li className="mb-2">
+                  <a
+                    className="text-muted hover:text-neutral-700 hover:underline dark:text-neutral-400 transition duration-150 ease-in-out"
+                    href="/services/automation-ai"
+                  >
+                    Automation & AI
+                  </a>
+                </li>
+                <li className="mb-2">
+                  <a
+                    className="text-muted hover:text-neutral-700 hover:underline dark:text-neutral-400 transition duration-150 ease-in-out"
+                    href="/services/marketing-funnels"
+                  >
+                    Marketing Funnels
+                  </a>
+                </li>
+                <li className="mb-2">
+                  <a
+                    className="text-muted hover:text-neutral-700 hover:underline dark:text-neutral-400 transition duration-150 ease-in-out"
+                    href="/services/digital-ads"
+                  >
+                    Digital Advertising
+                  </a>
+                </li>
+                <li className="mb-2">
+                  <a
+                    className="text-muted hover:text-neutral-700 hover:underline dark:text-neutral-400 transition duration-150 ease-in-out"
+                    href="/services/email-marketing"
+                  >
+                    Email Marketing
+                  </a>
+                </li>
+                <li className="mb-2">
+                  <a
+                    className="text-muted hover:text-neutral-700 hover:underline dark:text-neutral-400 transition duration-150 ease-in-out"
+                    href="/services/ecommerce"
+                  >
+                    Ecommerce
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div className="col-span-6 md:col-span-3 lg:col-span-2">
+              <div className="dark:text-neutral-300 font-medium mb-2">
+                Connect
+              </div>
+              <ul className="text-sm">
+                <li className="mb-2">
+                  <a
+                    className="text-muted hover:text-neutral-700 hover:underline dark:text-neutral-400 transition duration-150 ease-in-out"
+                    href="/contact"
+                  >
+                    Get in Touch
+                  </a>
+                </li>
+                <li className="mb-2">
+                  <a
+                    className="text-muted hover:text-neutral-700 hover:underline dark:text-neutral-400 transition duration-150 ease-in-out"
+                    href="/pricing"
+                  >
+                    Pricing
+                  </a>
+                </li>
+                <li className="mb-2">
+                  <a
+                    className="text-muted hover:text-neutral-700 hover:underline dark:text-neutral-400 transition duration-150 ease-in-out"
+                    href="https://calendly.com/relaydigitalyyc/discovery"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Book a Call
                   </a>
                 </li>
               </ul>
@@ -219,7 +326,9 @@ const Footer = () => {
                 </a>
               </li> */}
             </ul>
-            <div className="text-sm mr-4"> </div>
+            <div className="text-sm mr-4 text-neutral-500">
+              &copy; 2026 Relay Digital. All rights reserved.
+            </div>
           </div>
         </div>
       </div>

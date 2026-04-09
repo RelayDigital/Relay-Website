@@ -32,7 +32,7 @@ export async function POST(request) {
   try {
     // Send email to site owner
     await transporter.sendMail({
-      from: `"Relay Digital" <relaydigitalyyc@gmail.com>`, // Alias
+      from: `"Relay Digital" <hello@relaydigital.agency>`,
       to: myEmail,
       replyTo: email,
       subject: `Website activity from ${email}`,
@@ -42,7 +42,7 @@ export async function POST(request) {
             <p><strong>Name:</strong> ${name}</p>
             <p><strong>Email:</strong> <a href="mailto:${email}">${email}</a></p>
             <p><strong>Phone:</strong> ${phone}</p>
-            <p><strong>Website:</strong> ${project}</p>
+            <p><strong>Subject:</strong> ${project}</p>
             <p><strong>Message:</strong></p>
             <p>${message.replace(/\n/g, "<br>")}</p>
           </div>
@@ -51,8 +51,8 @@ export async function POST(request) {
 
     // Send confirmation email to the submitter
     await transporter.sendMail({
-      from: `"Relay Digital" <relaydigitalyyc@gmail.com>`, // Alias
-      to: email, // Note this change to send to the submitter
+      from: `"Relay Digital" <hello@relaydigital.agency>`,
+      to: email,
       subject: `Confirmation of Your Contact Request`,
       html: `
           <div style="font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-size: 16px; color: #333;">

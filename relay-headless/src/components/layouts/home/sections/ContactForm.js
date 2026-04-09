@@ -24,7 +24,11 @@ const ContactForm = () => {
     validateForm();
 
     form.addEventListener("input", validateForm);
-    return () => form.removeEventListener("input", validateForm);
+    form.addEventListener("change", validateForm);
+    return () => {
+      form.removeEventListener("input", validateForm);
+      form.removeEventListener("change", validateForm);
+    };
   }, []);
 
   const handleSubmit = async (e) => {
@@ -123,17 +127,29 @@ const ContactForm = () => {
         )}
       </div>
       <div className="mb-5">
-        <input
+        <select
           id="project"
-          type="text"
-          placeholder="New Project"
           name="project"
           required
-          className="w-full rounded-md border border-neutral-700 bg-neutral-900 px-4 py-3 outline-none placeholder:text-neutral-400 focus:border-neutral-400 focus:ring-0 text-neutral-50"
-        />
+          defaultValue=""
+          className="w-full rounded-md border border-neutral-700 bg-neutral-900 px-4 py-3 outline-none placeholder:text-neutral-400 focus:border-neutral-400 focus:ring-0 text-neutral-50 appearance-none"
+        >
+          <option value="" disabled className="text-neutral-400">Select a subject</option>
+          <option value="New Project">New Project</option>
+          <option value="Software Development">Software Development</option>
+          <option value="Automation & AI">Automation &amp; AI</option>
+          <option value="Marketing Funnels">Marketing Funnels</option>
+          <option value="Digital Advertising">Digital Advertising</option>
+          <option value="Email Marketing">Email Marketing</option>
+          <option value="Ecommerce">Ecommerce</option>
+          <option value="Consulting">Consulting</option>
+          <option value="Partnership">Partnership</option>
+          <option value="Careers">Careers</option>
+          <option value="General Inquiry">General Inquiry</option>
+        </select>
         {submitAttempted && !formRef.current?.project.value.trim() && (
           <div className="empty-feedback invalid-feedback mt-1 text-sm text-red-400">
-            Please enter a project name.
+            Please select a subject.
           </div>
         )}
       </div>

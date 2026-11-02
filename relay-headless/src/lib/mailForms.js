@@ -1,5 +1,6 @@
 import nodemailer from "nodemailer";
 import { cleanFields, escapeHtml, readBoundedRequest, validEmail } from "./mailInput.mjs";
+import { verifyEbookChallenge } from "./turnstile.mjs";
 
 const fieldLabels = {
   name: "Name", phone: "Phone", project: "Subject", message: "Message",
@@ -12,11 +13,24 @@ export async function handleMailForm(request, spec) {
   if (!user || !pass || !inbox || !validEmail(inbox) || !validEmail(sender())) {
     return Response.json({ message: "Mail delivery unavailable" }, { status: 503 });
   }
-  let data;
+  let data, payload;
   try {
-    data = cleanFields(await readBoundedRequest(request, spec.format), spec.fields);
+    payload = await readBoundedRequest(request, spec.format);
+    data = cleanFields(payload, spec.fields);
   } catch {
     return Response.json({ message: "Invalid request" }, { status: 400 });
+  }
+  if (spec.ebook) {
+    const verification = await verifyEbookChallenge(payload.turnstileToken, {
+      secret: process.env.TURNSTILE_SECRET_KEY,
+      hostname: process.env.TURNSTILE_HOSTNAME,
+    });
+    if (!verification.ok) {
+      return Response.json(
+        { message: verification.unavailable ? "Ebook requests temporarily unavailable" : "Verification failed. Please try again." },
+        { status: verification.unavailable ? 503 : 403 }
+      );
+    }
   }
   const lines = spec.fields.map(field =>
     `<p><strong>${escapeHtml(fieldLabels[field] || field)}:</strong> ${escapeHtml(data[field]).replace(/\n/g, "<br>")}</p>`
@@ -33,7 +47,7 @@ export async function handleMailForm(request, spec) {
   };
   try {
     if (spec.ebook) {
-      // This endpoint sends to a user-supplied address; deploy with abuse protection.
+      // Turnstile is verified server-side before sending to a user-supplied address.
       await transport.sendMail({
         from, to: data.email, subject: "Your Free Ebook Download",
         html: '<p>Thank you for requesting our ebook.</p><p><a href="https://drive.google.com/uc?export=download&amp;id=1ejqyBmSynDZcevGNv3aiKaROETa2JAmV">Download your ebook</a></p>'

@@ -42,12 +42,12 @@ export async function POST(request) {
       html: `
           <div style="font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-size: 16px; color: #333;">
             <h1>Website Design Request</h1>
-            <p><strong>Name:</strong> ${name}</p>
-            <p><strong>Email:</strong> <a href="mailto:${email}">${email}</a></p>
-            <p><strong>Website:</strong> ${website}</p>
-            <p><strong>Social:</strong> ${social} @${socialUsername}</p>
-            <p><strong>Monthly Visits:</strong> ${monthly_visits}</p>
-            <p><strong>Referral Source:</strong> ${referral_source}</p>
+            <p><strong>Name:</strong> ${escapeHtml(name)}</p>
+            <p><strong>Email:</strong> <a href="mailto:${escapeHtml(email)}">${escapeHtml(email)}</a></p>
+            <p><strong>Website:</strong> ${escapeHtml(website)}</p>
+            <p><strong>Social:</strong> ${escapeHtml(social)} @${escapeHtml(socialUsername)}</p>
+            <p><strong>Monthly Visits:</strong> ${escapeHtml(monthly_visits)}</p>
+            <p><strong>Referral Source:</strong> ${escapeHtml(referral_source)}</p>
           </div>
         `,
     });
@@ -60,12 +60,12 @@ export async function POST(request) {
       html: `
           <div style="font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-size: 16px; color: #333;">
             <h1>Thank You for Your Website Design Request</h1>
-            <p>Hello ${name},</p>
+            <p>Hello ${escapeHtml(name)},</p>
             <p>Thank you for requesting a free design. We have received your request and will get back to you as soon as possible. Here is a copy of your submission:</p>
-            <p><strong>Website:</strong> ${website}</p>
-            <p><strong>Social:</strong> ${social} @${socialUsername}</p>
-            <p><strong>Monthly Visits:</strong> ${monthly_visits}</p>
-            <p><strong>Referral Source:</strong> ${referral_source}</p>
+            <p><strong>Website:</strong> ${escapeHtml(website)}</p>
+            <p><strong>Social:</strong> ${escapeHtml(social)} @${escapeHtml(socialUsername)}</p>
+            <p><strong>Monthly Visits:</strong> ${escapeHtml(monthly_visits)}</p>
+            <p><strong>Referral Source:</strong> ${escapeHtml(referral_source)}</p>
             <p>You can schedule your free design review using the following link:</p>
             <p><a href="https://calendly.com/relaydigitalyyc/free-design">Book your design review</a></p>
             <p>Best regards,</p>

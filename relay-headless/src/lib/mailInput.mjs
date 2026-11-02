@@ -19,7 +19,8 @@ export function cleanFields(data, fields) {
   return out;
 }
 export async function readBoundedRequest(request, format) {
-  const type = (request.headers.get("content-type") || "").toLowerCase();
+  const rawType = request.headers.get("content-type") || "";
+  const type = rawType.toLowerCase();
   const length = Number(request.headers.get("content-length") || 0);
   if (length > MAX_BODY_BYTES) throw new Error("Body too large");
   if (format === "json" && !type.startsWith("application/json")) throw new Error("Unsupported type");
@@ -52,7 +53,7 @@ export async function readBoundedRequest(request, format) {
   }
   const parsed = await new Request("http://localhost", {
     method: "POST",
-    headers: { "content-type": type },
+    headers: { "content-type": rawType },
     body: bytes
   }).formData();
   const result = {};

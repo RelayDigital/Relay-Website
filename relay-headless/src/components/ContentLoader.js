@@ -4,24 +4,11 @@ import { useGlobalState } from "./GlobalStateContext";
 import config from "@/config";
 
 const fetchCMS = ({ collection }) => {
-  const reqOptions = {
-    headers: {
-      Authorization: `Bearer ${process.env.NEXT_PUBLIC_API_TOKEN}`,
-    },
-  };
-
-  return fetch(`${process.env.NEXT_PUBLIC_STRAPI_BASE_URL}/api/${collection}s?populate=*`, reqOptions)
-    .then((response) => {
-      if (response.ok) {
-        return response.json();
-      }
-      return response.text().then((text) => {
-        throw new Error(`Error ${response.status}: ${text}`);
-      });
-    })
-    .catch((error) => {
-      console.error("Fetch error:", error);
-      // console.log("API Token:", process.env.NEXT_PUBLIC_API_TOKEN);
+  // Public content is proxied by our server. Never ship a CMS bearer token to the browser.
+  return fetch(`/api/public-cms?collection=${encodeURIComponent(collection)}`)
+    .then(async (response) => {
+      if (!response.ok) throw new Error(`CMS request failed (${response.status})`);
+      return response.json();
     });
 };
 

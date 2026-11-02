@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Script from "next/script";
 import { useGlobalState } from "../contexts/GlobalStateContext";
 
 const ExitIntentPopup = () => {
@@ -10,6 +11,10 @@ const ExitIntentPopup = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitAttempted, setSubmitAttempted] = useState(false);
   const [isFormValid, setIsFormValid] = useState(false);
+  const [challengeToken, setChallengeToken] = useState("");
+  const widgetRef = useRef(null);
+  const widgetIdRef = useRef(null);
+  const siteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
 
   useEffect(() => {
     if (isExitIntentPopupOpen) {
@@ -19,23 +24,45 @@ const ExitIntentPopup = () => {
 
   useEffect(() => {
     const form = formRef.current;
+    if (!isExitIntentPopupOpen || !form) return;
     const validateForm = () => {
       setIsFormValid(
-        form.email.value.trim() !== "" && form.email.value.includes("@")
+        form.elements.namedItem("email")?.value.trim() !== "" &&
+        form.elements.namedItem("email")?.value.includes("@")
       );
     };
-
     validateForm();
-
     form.addEventListener("input", validateForm);
     return () => form.removeEventListener("input", validateForm);
-  }, []);
+  }, [isExitIntentPopupOpen]);
+
+  useEffect(() => {
+    if (isExitIntentPopupOpen) return;
+    if (widgetIdRef.current !== null && window.turnstile) {
+      window.turnstile.remove(widgetIdRef.current);
+    }
+    widgetIdRef.current = null;
+    setChallengeToken("");
+  }, [isExitIntentPopupOpen]);
+
+  const renderChallenge = () => {
+    if (!isExitIntentPopupOpen || !siteKey || !widgetRef.current ||
+        !window.turnstile || widgetIdRef.current !== null) return;
+    widgetIdRef.current = window.turnstile.render(widgetRef.current, {
+      sitekey: siteKey,
+      action: "ebook",
+      theme: "dark",
+      callback: (token) => setChallengeToken(token),
+      "expired-callback": () => setChallengeToken(""),
+      "error-callback": () => setChallengeToken(""),
+    });
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSubmitAttempted(true);
 
-    if (!isFormValid) {
+    if (!isFormValid || !challengeToken || !siteKey) {
       return;
     }
 
@@ -46,23 +73,26 @@ const ExitIntentPopup = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email: formRef.current.email.value }),
+        body: JSON.stringify({ email: formRef.current.email.value, turnstileToken: challengeToken }),
       });
 
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
 
-      const result = await response.json();
       setResult("Ebook successfully sent!");
       formRef.current.reset(); // Clear the form
       setIsFormValid(false); // Reset form validation state
       setSubmitAttempted(false); // Reset submit attempted state
     } catch (error) {
-      console.error("Error:", error);
-      setResult("Failed to send ebook.");
+      setResult("We could not send the ebook. Please try again.");
+    
     } finally {
       setIsSubmitting(false);
+      setChallengeToken("");
+      if (widgetIdRef.current !== null && window.turnstile) {
+        window.turnstile.reset(widgetIdRef.current);
+      }
     }
   };
 
@@ -73,6 +103,17 @@ const ExitIntentPopup = () => {
       <div className="mb-5 rounded-xl border border-neutral-700 bg-neutral-950 p-5 shadow-xl md:p-8 shadow-blue-500/50 text-center">
         <h2 className="text-2xl font-bold mb-4">Wait! Before you go...</h2>
         <p className="mb-4">Enter your email to download our free ebook.</p>
+        {siteKey ? (
+          <Script
+            src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"
+            strategy="afterInteractive"
+            onReady={renderChallenge}
+          />
+        ) : (
+          <p role="status" className="mb-4 text-sm text-amber-300">
+            Ebook delivery is temporarily unavailable.
+          </p>
+        )}
         <form ref={formRef} onSubmit={handleSubmit} className="space-y-4">
           <div className="mb-5">
             <input
@@ -94,16 +135,17 @@ const ExitIntentPopup = () => {
               </div>
             )}
           </div>
+          <div ref={widgetRef} aria-label="Human verification" className="flex justify-center" />
           <button
             type="submit"
             className={`button relative w-full transform overflow-hidden rounded-full border border-neutral-700 px-6 py-3 text-center transition duration-500 ${
-              !isFormValid
+              !isFormValid || !challengeToken || !siteKey
                 ? "bg-blue-500/20 text-neutral-400 cursor-not-allowed"
                 : "bg-blue-500 text-neutral-950 hover:text-neutral-50"
             } ${
               isSubmitting ? `cursor-wait bg-blue-500/20 text-neutral-400` : ``
             }`}
-            disabled={!isFormValid || isSubmitting}
+            disabled={!isFormValid || !challengeToken || !siteKey || isSubmitting}
           >
             <div className="group relative z-10">
               {isSubmitting ? "Sending..." : "Download Ebook"}

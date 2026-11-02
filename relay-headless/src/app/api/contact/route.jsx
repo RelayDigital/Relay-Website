@@ -3,9 +3,13 @@ const nodemailer = require("nodemailer");
 
 // Handles POST requests to /api
 export async function POST(request) {
-  const username = process.env.NEXT_PUBLIC_EMAIL_USERNAME;
-  const password = process.env.NEXT_PUBLIC_EMAIL_PASSWORD;
-  const myEmail = process.env.NEXT_PUBLIC_PERSONAL_EMAIL;
+  const username = process.env.SMTP_USERNAME;
+  const password = process.env.SMTP_PASSWORD;
+  const myEmail = process.env.CONTACT_INBOX_EMAIL;
+
+  if (!username || !password || !myEmail) {
+    return NextResponse.json({ message: "Mail delivery unavailable" }, { status: 503 });
+  }
 
   const formData = await request.formData();
   const name = formData.get("name");
@@ -69,7 +73,7 @@ export async function POST(request) {
 
     return NextResponse.json({ message: "Success: email was sent" });
   } catch (error) {
-    console.log(error);
-    return NextResponse.status(500).json({ message: "COULD NOT SEND MESSAGE" });
+    console.error("Relay contact mail delivery failed");
+    return NextResponse.json({ message: "COULD NOT SEND MESSAGE" }, { status: 500 });
   }
 }

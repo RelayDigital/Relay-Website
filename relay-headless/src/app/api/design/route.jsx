@@ -3,11 +3,26 @@ const nodemailer = require("nodemailer");
 
 // Handles POST requests to /api
 export async function POST(request) {
-  const username = process.env.NEXT_PUBLIC_EMAIL_USERNAME;
-  const password = process.env.NEXT_PUBLIC_EMAIL_PASSWORD;
-  const myEmail = process.env.NEXT_PUBLIC_PERSONAL_EMAIL;
+  const username = process.env.SMTP_USERNAME;
+  const password = process.env.SMTP_PASSWORD;
+  const myEmail = process.env.CONTACT_INBOX_EMAIL;
 
-  const { website, name, email, social, socialUsername, monthly_visits, referral_source } = await request.json();
+  if (!username || !password || !myEmail) {
+    return NextResponse.json({ message: "Mail delivery unavailable" }, { status: 503 });
+  }
+
+  let body;
+  try { body = await request.json(); } catch {
+    return NextResponse.json({ message: "Invalid request" }, { status: 400 });
+  }
+  if (!body || typeof body !== "object" || Array.isArray(body)) {
+    return NextResponse.json({ message: "Invalid request" }, { status: 400 });
+  }
+  const escapeHtml = value => String(value ?? "").slice(0, 2000).replace(/[&<>"']/g, ch => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[ch]);
+  const { website, name, email, social, socialUsername, monthly_visits, referral_source } = body;
+  if (typeof email !== "string" || email.length > 254 || !/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email)) {
+    return NextResponse.json({ message: "Invalid email" }, { status: 400 });
+  }
 
   const transporter = nodemailer.createTransport({
     service: "gmail",
@@ -61,7 +76,7 @@ export async function POST(request) {
 
     return NextResponse.json({ message: "Success: email was sent" });
   } catch (error) {
-    console.log(error);
-    return NextResponse.status(500).json({ message: "COULD NOT SEND MESSAGE" });
+    console.error("Relay design mail delivery failed");
+    return NextResponse.json({ message: "COULD NOT SEND MESSAGE" }, { status: 500 });
   }
 }

@@ -18,6 +18,6 @@ jobs:
           node-version: "22"
           cache: npm
           cache-dependency-path: relay-headless/package-lock.json
-      - run: node --test tests/public-env-safety.test.mjs
+      - run: node --test tests/*.test.mjs
       - run: npm ci --no-audit --no-fund
       - run: npm run build

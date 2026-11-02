@@ -20,7 +20,7 @@ export async function POST(request) {
   }
   const escapeHtml = value => String(value ?? "").slice(0, 2000).replace(/[&<>"']/g, ch => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[ch]);
   const { website, name, email, social, socialUsername, monthly_visits, referral_source } = body;
-  if (typeof email !== "string" || email.length > 254 || !/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email)) {
+  if (typeof email !== "string" || email.length > 254 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return NextResponse.json({ message: "Invalid email" }, { status: 400 });
   }
 
